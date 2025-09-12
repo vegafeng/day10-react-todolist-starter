@@ -1,3 +1,5 @@
+
+
 body {
     font-family: 'Arial', sans-serif; 
     background-color: #f0f0f5; 
@@ -16,8 +18,8 @@ body {
     background-color: #ffffff; 
     border-radius: 8px; 
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+    overflow: hidden; 
 }
-
 
 h2 {
     text-align: center; 
@@ -44,16 +46,12 @@ h2 {
     transition: background-color 0.3s, transform 0.3s; 
 }
 
-.todo-item:hover {
-    background-color: #e8e8e8; 
-    transform: translateY(-2px); 
-}
-
 .todo-text {
     flex-grow: 1; 
     cursor: pointer; 
     padding-right: 10px; 
-    font-size: 18px; 
+    overflow-x: auto; 
+    white-space: nowrap; 
 }
 
 .todo-text.done {
