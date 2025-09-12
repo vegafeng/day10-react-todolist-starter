@@ -19,3 +19,47 @@ body {
     border-radius: 8px; /* 圆角 */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* 阴影效果 */
 }
+
+
+h2 {
+    text-align: center; /* 标题居中 */
+    color: #333; /* 标题颜色 */
+    margin-bottom: 30px; /* 标题底部间距 */
+    font-size: 36px; /* 增加标题字体大小 */
+}
+
+.todo-items-container {
+    max-height: 300px; /* 设置最大高度，增加到 1.5 倍 */
+    overflow-y: auto; /* 允许垂直滚动 */
+    margin-bottom: 30px; /* 与输入框的间距 */
+}
+
+.todo-item {
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: space-between; /* 两端对齐 */
+    align-items: center; /* 垂直居中 */
+    padding: 12px; /* 增加内边距 */
+    margin: 10px 0; /* 上下间距 */
+    border: 1px solid #ccc; /* 边框 */
+    border-radius: 4px; /* 圆角 */
+    background-color: #f9f9f9; /* 背景色 */
+    transition: background-color 0.3s, transform 0.3s; /* 过渡效果 */
+}
+
+.todo-item:hover {
+    background-color: #e8e8e8; /* 鼠标悬停时的背景色 */
+    transform: translateY(-2px); /* 悬停时轻微上浮 */
+}
+
+.todo-text {
+    flex-grow: 1; /* 使文本占用剩余空间 */
+    cursor: pointer; /* 鼠标悬停时显示为手指 */
+    padding-right: 10px; /* 文本与按钮之间的间距 */
+    font-size: 18px; /* 增加待办事项文本字体大小 */
+}
+
+.todo-text.done {
+    text-decoration: line-through; /* 完成的待办事项文本删除线 */
+    color: #888; /* 完成时的文本颜色 */
+}
+
