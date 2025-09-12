@@ -98,3 +98,17 @@ input[type="text"]:focus {
     outline: none; /* 去掉默认的聚焦轮廓 */
 }
 
+button {
+    background-color: #6d5bcf; /* 按钮背景色 */
+    color: white; /* 按钮文本颜色 */
+    border: none; /* 去掉按钮边框 */
+    border-radius: 4px; /* 圆角 */
+    padding: 12px 18px; /* 增加内边距 */
+    cursor: pointer; /* 鼠标悬停时显示为手指 */
+    transition: background-color 0.3s; /* 过渡效果 */
+    font-size: 16px; /* 增加按钮字体大小 */
+}
+
+button:hover {
+    background-color: #5a4bbf; /* 鼠标悬停时的背景色 */
+}
