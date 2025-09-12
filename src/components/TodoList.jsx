@@ -20,7 +20,9 @@ const TodoList = () => {
     setInputValue('');
   };
 
-  
+  const handleClickDelete = (id) => {
+    dispatch({ type: 'Delete', id });
+  };
 
   return (
     <div className="todo-list">
@@ -41,6 +43,7 @@ const TodoList = () => {
                 <span className={`todo-text ${done ? 'done' : ''}`} onClick={() => handleClick(id)}>
                   {text}
                 </span>
+                <button className="delete-button" onClick={() => handleClickDelete(id)}>X</button>
               </div>
             ))}
           </div>
