@@ -14,5 +14,9 @@ export const todoReducer = (state, action) => {
         }
         return todo;
       });
+    case 'Add':
+      return [...state, {id: Date.now(), text: action.text, done: false}];
+    case 'Delete':
+      return state.filter(todo => todo.id != action.id);
   return state;
 }};
