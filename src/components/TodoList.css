@@ -1,0 +1,40 @@
+/* 
+.todo-item:hover {
+    background-color: #e91919;
+    border: 3px solid #6d5bcf;
+} */
+/* TodoList.css */
+
+.todo-item {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s;
+
+
+    &.done {
+        text-decoration: line-through;
+        background-color: aqua;
+    }
+}
+
+.todo-item:hover {
+    background-color: #e0e0e0; /* 鼠标悬停时的背景色 */
+}
+
+.todo-list {
+    max-width: 600px; /* 设置最大宽度 */
+    margin: 0 auto; /* 居中对齐 */
+    padding: 20px;
+    background-color: #fff; /* 背景色 */
+    border-radius: 8px; /* 圆角 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+.todo-header {
+    font-size: 24px; /* 标题字体大小 */
+    margin-bottom: 20px; /* 标题与内容之间的间距 */
+    text-align: center; /* 标题居中 */
+}
