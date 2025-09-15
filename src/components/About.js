@@ -1,14 +1,56 @@
-import React from 'react';
-import './About.css'; // 引入 CSS 文件
+import React, { useEffect, useRef } from 'react';
+import './About.css';
 
 const About = () => {
+  
+  const auraRef = useRef(null);
+
+  
+  useEffect(() => {
+    if (auraRef.current) {
+      
+      const auraCount = Math.floor(Math.random() * 3) + 3;
+      for (let i = 0; i < auraCount; i++) {
+        const auraLine = document.createElement('div');
+        auraLine.className = 'aura-line';
+        
+        auraLine.style.top = `${Math.random() * 80 + 10}%`;
+        auraLine.style.left = `${Math.random() * 80 + 10}%`;
+        auraLine.style.transform = `rotate(${Math.random() * 360}deg)`;
+        auraLine.style.animationDuration = `${Math.random() * 3 + 4}s`;
+        auraLine.style.animationDelay = `${Math.random() * 2}s`;
+        auraRef.current.appendChild(auraLine);
+      }
+    }
+  }, []);
+
   return (
     <div className="about-container">
-      <h1 className="about-title">About Us</h1>
-      <p className="about-description">
-        Welcome to our Todo application! Here, you can manage your tasks effortlessly.
-        We believe in simplicity and efficiency, making your productivity soar!
-      </p>
+      {}
+      <div className="hunter-aura-container" ref={auraRef}></div>
+      
+      {}
+      <h1 className="about-title">
+        {[..."About Us"].map((char, idx) => (
+          <span key={idx} className="title-char" style={{ animationDelay: `${idx * 0.1}s` }}>
+            {char}
+          </span>
+        ))}
+      </h1>
+      
+      {}
+      <div className="about-desc-wrapper">
+        <p className="about-description section-1">
+          Welcome to our Todo application! Here, you can manage your tasks effortlessly.
+        </p>
+        <p className="about-description section-2">
+          We believe in simplicity and efficiency, making your productivity soar!
+        </p>
+        {}
+        <p className="about-hunter-slogan">
+          「像猎人执行任务一样，高效完成每一个待办！」
+        </p>
+      </div>
     </div>
   );
 };

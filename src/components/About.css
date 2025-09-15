@@ -1,45 +1,184 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Arial', sans-serif;
+}
+
+
 .about-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%; 
-  background: linear-gradient(135deg, #f0e68c, #f7b2f2); 
+  padding: 2rem;
+  background: linear-gradient(135deg, #87e8de 0%, #f7b2f2 50%, #ffd791 100%);
   color: #333;
   text-align: center;
-  animation: fadeIn 1.5s ease-in-out; 
+  overflow: hidden;
 }
 
-.about-title {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  animation: bounce 1s infinite; 
+
+.hunter-aura-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; 
+  z-index: 0;
 }
+
+
+.aura-line {
+  position: absolute;
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(180deg, rgba(255, 215, 145, 0) 0%, #ffd791 50%, rgba(255, 215, 145, 0) 100%);
+  opacity: 0.7;
+  animation: auraFlow linear infinite;
+}
+
+
+@keyframes auraFlow {
+  0% {
+    transform: rotate(var(--rotate)) scaleY(0);
+    opacity: 0;
+  }
+  20% {
+    transform: rotate(var(--rotate)) scaleY(1);
+    opacity: 0.8;
+  }
+  80% {
+    transform: rotate(var(--rotate)) scaleY(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotate(var(--rotate)) scaleY(0);
+    opacity: 0;
+  }
+}
+
+
+.about-title {
+  position: relative;
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+  z-index: 1;
+  
+  text-shadow: 0 0 10px rgba(255, 215, 145, 0.8), 0 0 20px rgba(255, 165, 0, 0.5);
+}
+
+
+.title-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: titleBounce 0.8s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+
+@keyframes titleBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-15px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+.about-desc-wrapper {
+  position: relative;
+  max-width: 700px;
+  z-index: 1;
+}
+
 
 .about-description {
   font-size: 1.5rem;
-  max-width: 600px;
-  line-height: 1.6;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: descSlideIn 1s forwards ease-out;
+  
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
 }
 
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
+.about-description.section-1 {
+  animation-delay: 0.3s;
+}
+.about-description.section-2 {
+  animation-delay: 0.8s;
+}
+
+
+@keyframes descSlideIn {
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
+
+.about-hunter-slogan {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-family: 'Noto Sans SC', sans-serif; 
+  color: #7a2e00; 
+  opacity: 0;
+  transform: scale(0.9);
+  animation: sloganPop 1s forwards ease-out;
+  animation-delay: 1.2s;
+  
+  border: 2px dashed #ffd791;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+}
+
+
+@keyframes sloganPop {
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  40% {
-    transform: translateY(-20px);
+}
+
+
+@media (max-width: 768px) {
+  .about-title {
+    font-size: 2.5rem;
   }
-  60% {
-    transform: translateY(-10px);
+  .about-description {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.2rem;
   }
+  .about-hunter-slogan {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+  .hunter-aura-container .aura-line {
+    height: 40px;
+  }
+}
+
+@import url('https://fonts.cdnfonts.com/css/hunter-x-hunter');
+.about-title {
+  font-family: 'Hunter X Hunter', sans-serif;
 }
