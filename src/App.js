@@ -10,6 +10,7 @@ import {
 } from "react-router";
 import  DefaultLayOut  from "./layout/DefaultLayOut";
 import HomePage from "./components/HomePage";
+import CompletedTodos from "./components/CompletedTodos ";
 
 function ToDoDetail(){
   const {key}=useParams();
@@ -48,6 +49,10 @@ const routes = [
       {
         path: 'todos/:key',
         element: <ToDoDetail />
+      },
+      {
+        path: 'completed',
+        element: <CompletedTodos /> // 新增的路由
       }
 
     ]
