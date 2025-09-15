@@ -1,27 +1,33 @@
 import React, { useContext, useState } from 'react';
 import { TodoContext } from '../contexts/TodoContext';
 import './TodoList.css';
+import ToDoGroup from './ToDoGroup';
+import { createToDo } from '../apis/api';
+import AddToDoList from './AddToDoList';
 
 const TodoList = () => {
   const { state, dispatch } = useContext(TodoContext); 
   const [inputValue, setInputValue] = useState('');
+  // state = ToDoGroup();
 
-  const handleClick = (id) => {
-    dispatch({ type: 'Done', id });
-  };
+
 
   const handleChangeInput = (e) => {
     setInputValue(e.target.value);
   };
 
-  const handleAdd = () => {
+  const handleAdd = async() => {
     if (inputValue.trim().length === 0) return alert('Input is empty');
     dispatch({ type: 'Add', text: inputValue });
     setInputValue('');
-  };
+    const newToDo = {
+      done: false,
+      text: inputValue.trim()
+    }
+    const response = await createToDo(newToDo);
+    dispatch({ type: 'Add', todos: response.data });
+    setInputValue('');
 
-  const handleClickDelete = (id) => {
-    dispatch({ type: 'Delete', id });
   };
 
   return (
@@ -38,19 +44,13 @@ const TodoList = () => {
       ) : (
         <>
           <div className="todo-items-container">
-            {state.map(({ text, done, id }) => (
-              <div key={id} className="todo-item">
-                <span className={`todo-text ${done ? 'done' : ''}`} onClick={() => handleClick(id)}>
-                  {text}
-                </span>
-                <button className="delete-button" onClick={() => handleClickDelete(id)}>X</button>
-              </div>
-            ))}
+            <ToDoGroup />
           </div>
-          <div className="input-container">
+          {/* <div className="input-container">
             <input type="text" value={inputValue} onChange={handleChangeInput} placeholder="Add a new todo..." />
             <button onClick={handleAdd}>Add</button>
-          </div>
+          </div> */}
+          <AddToDoList />
         </>
       )}
     </div>
