@@ -7,17 +7,17 @@ const DoneTodos = () => {
   const { state } = useContext(TodoContext); 
   const glowContainerRef = useRef(null);
   
-  // 生成背景光效元素
+  
   useEffect(() => {
     if (!glowContainerRef.current) return;
     
-    // 创建多个光效元素
+    
     const glowCount = 4;
     for (let i = 0; i < glowCount; i++) {
       const glow = document.createElement('div');
       glow.className = 'background-glow';
       
-      // 随机位置和大小
+      
       glow.style.top = `${Math.random() * 100}%`;
       glow.style.left = `${Math.random() * 100}%`;
       glow.style.width = `${Math.random() * 300 + 200}px`;
@@ -33,7 +33,7 @@ const DoneTodos = () => {
 
   return (
     <div className="done-todos-container">
-      {/* 背景光效容器 */}
+      {}
       <div className="glow-container" ref={glowContainerRef}></div>
       
       <div className="done-todos">
