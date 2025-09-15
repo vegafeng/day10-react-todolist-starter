@@ -43,10 +43,6 @@ const handleChangeInput = (e) => {
           <div className="todo-items-container">
             <ToDoGroup />
           </div>
-          {/* <div className="input-container">
-            <input type="text" value={inputValue} onChange={handleChangeInput} placeholder="Add a new todo..." />
-            <button onClick={handleAdd}>Add</button>
-          </div> */}
           <AddToDoList />
         </>
       )}

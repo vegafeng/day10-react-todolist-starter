@@ -1,6 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { getToDos } from "../apis/api";
 import { TodoContext } from "../contexts/TodoContext"; 
+import { deleteToDo } from "../apis/api";
+import {updateToDo} from "../apis/api";
+import './TodoList.css';
 const ToDoGroup = () => {
   const { state, dispatch } = useContext(TodoContext);
   useEffect(() => {
@@ -9,14 +12,17 @@ const ToDoGroup = () => {
       console.log(response.data);
     });
 
+
   }, []);
 
-    const handleClick = (id) => {
+    const handleClick = async (id) => {
+    await updateToDo(id);
     dispatch({ type: 'Done', id });
   };
   
-  const handleClickDelete = (id) => {
-    dispatch({ type: 'Delete', id });
+  const handleClickDelete = async (id) => {
+    await deleteToDo(id); // 调用删除的 API
+    dispatch({ type: 'Delete', id }); // 更新状态
   };
 
   return <>
