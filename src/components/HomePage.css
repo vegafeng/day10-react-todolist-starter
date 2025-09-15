@@ -1,4 +1,4 @@
-/* 全局基础样式重置：只重置盒模型，不强制隐藏滚动（避免影响其他页面） */
+
 * {
   margin: 0;
   padding: 0;
@@ -6,31 +6,31 @@
   font-family: 'Inter', 'Arial', sans-serif;
 }
 
-/* 移除 body 强制隐藏纵向滚动的代码！避免影响整个页面布局 */
+
 body {
   background-color: #f0f0f5;
-  overflow-x: hidden; /* 只保留横向防滚动，纵向随内容自适应 */
+  overflow-x: hidden; 
 }
 
-/* 主页容器：关键修改！高度基准改为父容器（main）100%，不再强制屏幕全屏 */
+
 .home-page {
   position: relative;
-  width: 100%; /* 占满父容器（main）宽度 */
-  height: 100%; /* 占满父容器（main）高度，不超出 */
+  width: 100%; 
+  height: 100%; 
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  overflow: hidden; /* 隐藏内部装饰元素溢出，不影响外部滚动 */
-  padding: 20px; /* 预留内边距，防止内容贴边 */
+  overflow: hidden; 
+  padding: 20px; 
 }
 
-/* 背景动态光斑：按比例缩小，避免在小容器内溢出 */
+
 .home-bg-decoration {
   position: absolute;
-  width: 120%; /* 略大于容器，增强环绕感但不溢出 */
+  width: 120%; 
   height: 120%;
-  max-width: 600px; /* 限制最大尺寸，小容器不夸张 */
+  max-width: 600px; 
   max-height: 600px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(109, 91, 207, 0.2) 0%, rgba(109, 91, 207, 0) 70%);
@@ -41,7 +41,7 @@ body {
   z-index: 0;
 }
 
-/* 背景光斑额外装饰：同步缩小比例 */
+
 .home-bg-decoration::before {
   content: "";
   position: absolute;
@@ -56,32 +56,39 @@ body {
   animation: bgFloat 12s infinite ease-in-out;
 }
 
-/* 主内容容器：增加最大宽度，防止宽屏时内容过散 */
+
 .home-content {
   position: relative;
   z-index: 1;
   text-align: center;
   padding: 0 20px;
-  max-width: 600px; /* 限制内容最大宽度，适配 main 容器 */
+  max-width: 600px; 
   width: 100%;
 }
 
-/* 标题：优化响应式字号，避免小容器内换行溢出 */
+
 .home-title {
-  font-size: clamp(2rem, 5vw, 3rem); /* 动态字号：最小2rem，最大3rem，随容器宽度变化 */
+  font-size: clamp(2rem, 5vw, 3rem); 
   font-weight: 700;
   color: #333;
   margin-bottom: 1.5rem;
   letter-spacing: -0.5px;
-  line-height: 1.2; /* 紧凑行高，减少换行 */
+  line-height: 1.2; 
 }
 
-/* 标题单个字符动画：保持原效果，不修改 */
+
 .title-char {
-  display: inline-block;
+  display: inline-block; 
   opacity: 0;
   transform: scale(0.8);
   animation: charFadeIn 0.8s forwards ease-out;
+  
+  min-width: 0.2em; 
+}
+
+
+.title-char:contains(" ") {
+  width: 0.5em; 
 }
 
 .title-char:nth-child(n+1) { animation-delay: 0.1s; }
@@ -90,9 +97,9 @@ body {
 .title-char:nth-child(n+15) { animation-delay: 0.4s; }
 .title-char:nth-child(n+20) { animation-delay: 0.5s; }
 
-/* 副标题：优化字号和边距，适配内容区 */
+
 .home-desc {
-  font-size: clamp(1rem, 2vw, 1.25rem); /* 动态字号，避免溢出 */
+  font-size: clamp(1rem, 2vw, 1.25rem); 
   color: #666;
   margin-bottom: 2rem;
   opacity: 0;
@@ -102,7 +109,7 @@ body {
   line-height: 1.5;
 }
 
-/* 按钮容器：保持原动画，不修改 */
+
 .home-cta {
   opacity: 0;
   transform: translateY(20px);
@@ -110,15 +117,15 @@ body {
   animation-delay: 1.2s;
 }
 
-/* 按钮：优化内边距比例，避免小容器内过大 */
+
 .cta-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.8rem 2rem; /* 相对单位，随字号缩放 */
+  padding: 0.8rem 2rem; 
   background: linear-gradient(135deg, #6d5bcf 0%, #5a4bbf 100%);
   color: #fff;
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem); /* 动态字号 */
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem); 
   font-weight: 600;
   border-radius: 50px;
   text-decoration: none;
@@ -126,10 +133,10 @@ body {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  white-space: nowrap; /* 防止按钮文字换行 */
+  white-space: nowrap; 
 }
 
-/* 按钮交互效果：保持原效果，不修改 */
+
 .cta-btn:hover {
   transform: scale(1.05);
   box-shadow: 0 12px 32px rgba(109, 91, 207, 0.4);
@@ -166,7 +173,7 @@ body {
   transform: translateX(100%);
 }
 
-/* 动画关键帧：保持原效果，不修改 */
+
 @keyframes bgPulse {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
@@ -207,10 +214,10 @@ body {
   }
 }
 
-/* 响应式适配：强化小容器适配，避免溢出 */
+
 @media (max-width: 768px) {
   .home-page {
-    padding: 15px; /* 小容器减少内边距 */
+    padding: 15px; 
   }
   
   .home-bg-decoration {
@@ -224,21 +231,28 @@ body {
   }
   
   .home-title {
-    margin-bottom: 1rem; /* 减少标题边距，节省空间 */
+    margin-bottom: 1rem; 
   }
   
   .home-desc {
-    margin-bottom: 1.5rem; /* 减少副标题边距 */
+    margin-bottom: 1.5rem; 
   }
 }
 
-/* 超小容器适配（如手机竖屏） */
+
 @media (max-width: 375px) {
   .cta-btn {
-    padding: 0.7rem 1.5rem; /* 进一步缩小按钮内边距 */
+    padding: 0.7rem 1.5rem; 
   }
   
   .home-title {
-    font-size: 1.8rem; /* 强制限制最小字号，避免过小 */
+    font-size: 1.8rem; 
   }
+}
+
+
+.title-char:empty {
+  
+  width: 0.5em; 
+  visibility: hidden; 
 }
