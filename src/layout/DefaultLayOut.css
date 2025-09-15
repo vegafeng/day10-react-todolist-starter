@@ -26,7 +26,7 @@ body {
 }
 
 .content {
-    padding: 20px; /* 内容内边距 */
+    padding: 10px; /* 内容内边距 */
     background-color: #ffffff; /* 内容背景颜色 */
     flex-grow: 1; /* 占据剩余空间 */
     overflow: auto; /* 允许滚动 */

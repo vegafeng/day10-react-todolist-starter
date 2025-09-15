@@ -10,13 +10,13 @@
     /* height: 100vh;  */
 /* } */ */
 .todo-list {
-    max-width: 600px; 
-    width: 100%; 
+    /* max-width: 600px;  */
+    /* width: 100%;  */
     padding: 45px; 
     background-color: #ffffff; 
     border-radius: 8px; 
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
-    overflow: hidden; 
+    /* overflow: hidden;  */
     align-items: center;
 }
 
@@ -28,9 +28,9 @@ h2 {
 }
 
 .todo-items-container {
-    max-height: 300px; 
+    height: 260px; 
     overflow-y: auto;    /* Add scroll for long lists */
-    margin-bottom: 30px; 
+    /* margin-bottom: 30px;  */
     align-items: center;
 }
 
