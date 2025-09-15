@@ -1,9 +1,11 @@
+import { use, useContext, useEffect } from "react";
+import { getToDos } from "../apis/api";
+
 export const initialState = [
   {id: 1, text: "the first todo", done: false},
   {id: 2, text: "the second todo", done: false},
 ];
 
-// reducer is a pure function that define and gather all state update logic
 export const todoReducer = (state, action) => {
   switch(action.type) {
     case 'Done':
@@ -18,5 +20,9 @@ export const todoReducer = (state, action) => {
       return [...state, {id: Date.now(), text: action.text, done: false}];
     case 'Delete':
       return state.filter(todo => todo.id != action.id);
-  return state;
-}};
+    case 'LOAD_TODOS':
+      return action.todos;
+    default:
+      return state;
+  }
+};
