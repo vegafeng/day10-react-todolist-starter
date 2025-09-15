@@ -12,6 +12,7 @@ import  DefaultLayOut  from "./layout/DefaultLayOut";
 import HomePage from "./components/HomePage";
 import CompletedTodos from "./components/CompletedTodos ";
 import DoneTodos from "./components/DoneTodos";
+import About from "./components/About";
 
 function ToDoDetail(){
   const {key}=useParams();
@@ -41,7 +42,7 @@ const routes = [
       },
       {
         path: 'about',
-        element: <h2>About Page</h2>
+        element: <About />
       },
       {
         path: 'todos',
