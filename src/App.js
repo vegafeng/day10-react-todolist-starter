@@ -40,10 +40,21 @@ function ToDoDetail(){
   return <div>This is:  {key} Detail</div>
 }
 
+function ErrorPage() {
+  return (
+    <div>
+      <h2>Page Not Found</h2> 
+      <p>The page you are looking for does not exist.</p>
+    </div>
+  );
+}
+
+
 const routes = [
   {
     path: '/',
     element: <DefaultLayOut />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '',
@@ -56,7 +67,12 @@ const routes = [
       {
         path: 'todos',
         element: <TodoList />
+      },
+      {
+        path: 'todos/:key',
+        element: <ToDoDetail />
       }
+
     ]
   }
 ];
