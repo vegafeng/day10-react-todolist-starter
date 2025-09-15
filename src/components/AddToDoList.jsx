@@ -12,8 +12,6 @@ const AddToDoList = () => {
 
   const handleAdd = async() => {
     if (inputValue.trim().length === 0) return alert('Input is empty');
-    // dispatch({ type: 'Add', text: inputValue });
-    // setInputValue('');
     const newToDo = {
       done: false,
       text: inputValue.trim()

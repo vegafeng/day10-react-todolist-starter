@@ -8,13 +8,10 @@ import AddToDoList from './AddToDoList';
 const TodoList = () => {
   const { state, dispatch } = useContext(TodoContext); 
   const [inputValue, setInputValue] = useState('');
-  // state = ToDoGroup();
 
-
-
-  const handleChangeInput = (e) => {
-    setInputValue(e.target.value);
-  };
+const handleChangeInput = (e) => {
+ setInputValue(e.target.value);
+ };
 
   const handleAdd = async() => {
     if (inputValue.trim().length === 0) return alert('Input is empty');
@@ -28,7 +25,7 @@ const TodoList = () => {
     dispatch({ type: 'Add', todos: response.data });
     setInputValue('');
 
-  };
+};
 
   return (
     <div className="todo-list">
