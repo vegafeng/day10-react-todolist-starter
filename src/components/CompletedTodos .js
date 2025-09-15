@@ -1,21 +1,14 @@
 // src/components/CompletedTodos.js
-import React, { useContext, useState, useEffect } from 'react'; // 从 'react' 导入 useEffect
+import React, { useContext, useState, useEffect } from 'react';
 import { TodoContext } from '../contexts/TodoContext';
-import './CompletedTodos.css'; // 确保引用正确的 CSS 文件
-import { createToDo } from '../apis/api';
-import { useNavigate } from 'react-router'; // 从 'react-router-dom' 导入 useNavigate
+import { Input, Button, List, Typography, Spin } from 'antd'; // 引入 Ant Design 组件
+import { PlusCircleOutlined } from '@ant-design/icons'; // 引入图标
+import './CompletedTodos.css';
+import { createToDo } from '../apis/api'; // 假设 createToDo 是创建待办事项的函数
 
 const CompletedTodos = () => {
-    const { state, dispatch } = useContext(TodoContext); // 获取 state
+    const { state, dispatch } = useContext(TodoContext);
     const [inputValue, setInputValue] = useState('');
-    const navigate = useNavigate(); // 创建 navigate 函数
-
-    // 使用 useEffect 监听 state 的变化
-    useEffect(() => {
-        if (state.length !== 0) {
-            navigate('/todos'); // 跳转到 todos 页面
-        }
-    }, [state, navigate]);
 
     const handleChangeInput = (e) => {
         setInputValue(e.target.value);
@@ -24,34 +17,49 @@ const CompletedTodos = () => {
     const handleAdd = async () => {
         if (inputValue.trim().length === 0) return alert('Input is empty');
         const newToDo = {
-            done: false, // 标记为已完成
+            done: false,
             text: inputValue.trim()
         };
+        
+        // 模拟 API 请求
         const response = await createToDo(newToDo);
         dispatch({ type: 'Add', todos: response.data });
         setInputValue('');
     };
 
-    // const completedTodos = state.todos;
-
     return (
         <div className="completed-todos">
-            <h2>Completed Todos</h2>
+            <Typography.Title level={2}>Completed Todos</Typography.Title>
             {state.length === 0 ? (
                 <>
-                    <p>No completed tasks yet!</p>
+                    <Typography.Text>No completed tasks yet!</Typography.Text>
                     <div className="input-container">
-                        <input 
-                            type="text" 
+                        <Input 
                             value={inputValue} 
                             onChange={handleChangeInput} 
                             placeholder="Add a new todo..." 
+                            style={{ width: '70%', marginRight: '10px' }} 
                         />
-                        <button onClick={handleAdd}>Add</button>
+                        <Button 
+                            type="primary" 
+                            icon={<PlusCircleOutlined />} 
+                            onClick={handleAdd}
+                        >
+                            Add
+                        </Button>
                     </div>
                 </>
             ) : (
-               <></>
+                <List
+                    className="completed-todo-list"
+                    bordered
+                    dataSource={state.filter(todo => todo.done)}
+                    renderItem={item => (
+                        <List.Item className="completed-todo-item">
+                            <Typography.Text>{item.text}</Typography.Text>
+                        </List.Item>
+                    )}
+                />
             )}
         </div>
     );
