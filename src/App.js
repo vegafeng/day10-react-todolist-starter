@@ -54,11 +54,11 @@ const routes = [
       },
       {
         path: 'completed',
-        element: <CompletedTodos /> // 新增的路由
+        element: <CompletedTodos /> 
       },
       {
-        path: 'done', // 新增的路由
-        element: <DoneTodos /> // 已完成的待办事项组件
+        path: 'done',
+        element: <DoneTodos /> 
       }
 
     ]
@@ -68,7 +68,6 @@ const routes = [
 const router = createBrowserRouter(routes);
 
 function App() {
-  // the Hooks API manage component data state
   const [state, dispatch] = useReducer(todoReducer, initialState);
   const value = {state, dispatch};
 

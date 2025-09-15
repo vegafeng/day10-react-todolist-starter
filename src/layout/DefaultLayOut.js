@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router";
 import { Layout, Menu } from 'antd';
 import { HomeOutlined, ExclamationOutlined, SettingFilled, CheckOutlined } from '@ant-design/icons';
-// import './DefaultLayOut.css';
+
 
 const { Header, Footer, Content } = Layout;
 
