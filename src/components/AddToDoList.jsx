@@ -10,6 +10,12 @@ const AddToDoList = () => {
   const handleChangeInput = (e) => {
     setInputValue(e.target.value);
   };
+    // 处理回车键添加
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleAdd();
+    }
+  };
 
   const handleAdd = async () => {
     if (inputValue.trim().length === 0) return alert('Input is empty');
@@ -21,7 +27,7 @@ const AddToDoList = () => {
 
     try {
       const response = await createToDo(newToDo);
-      dispatch({ type: 'Add', todos: response }); // 添加新待办事项
+      dispatch({ type: 'Add',  text: inputValue.trim() }); // 添加新待办事项
       setInputValue('');
     } catch (error) {
       console.error('Error adding todo:', error);
@@ -35,6 +41,7 @@ const AddToDoList = () => {
         type="text" 
         value={inputValue} 
         onChange={handleChangeInput} 
+        onKeyPress={handleKeyPress}
         placeholder="Add a new todo..." 
       />
       <button onClick={handleAdd}>Add</button>
