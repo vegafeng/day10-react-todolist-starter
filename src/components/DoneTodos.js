@@ -1,33 +1,68 @@
-// src/components/DoneTodos.js
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { TodoContext } from '../contexts/TodoContext';
-import { List, Typography } from 'antd'; // 引入 Ant Design 组件
-import './DoneTodos.css'; // 引入 CSS 文件
+import { List, Typography } from 'antd'; 
+import './DoneTodos.css'; 
 
 const DoneTodos = () => {
-  const { state } = useContext(TodoContext); // 获取待办事项的状态
-
-  // 过滤出已完成的待办事项
+  const { state } = useContext(TodoContext); 
+  const glowContainerRef = useRef(null);
+  
+  // 生成背景光效元素
+  useEffect(() => {
+    if (!glowContainerRef.current) return;
+    
+    // 创建多个光效元素
+    const glowCount = 4;
+    for (let i = 0; i < glowCount; i++) {
+      const glow = document.createElement('div');
+      glow.className = 'background-glow';
+      
+      // 随机位置和大小
+      glow.style.top = `${Math.random() * 100}%`;
+      glow.style.left = `${Math.random() * 100}%`;
+      glow.style.width = `${Math.random() * 300 + 200}px`;
+      glow.style.height = `${Math.random() * 300 + 200}px`;
+      glow.style.animationDelay = `${Math.random() * 5}s`;
+      glow.style.animationDuration = `${Math.random() * 10 + 15}s`;
+      
+      glowContainerRef.current.appendChild(glow);
+    }
+  }, []);
+  
   const completedTodos = state.filter(todo => todo.done);
 
   return (
-    <div className="done-todos">
-      <Typography.Title level={2}>Completed Todos</Typography.Title>
-      {completedTodos.length === 0 ? (
-        <Typography.Text>No completed tasks yet!</Typography.Text>
-      ) : (
-        <List
-          bordered
-          dataSource={completedTodos}
-          renderItem={item => (
-            <List.Item>
-              <Typography.Text>{item.text}</Typography.Text>
-            </List.Item>
-          )}
-        />
-      )}
+    <div className="done-todos-container">
+      {/* 背景光效容器 */}
+      <div className="glow-container" ref={glowContainerRef}></div>
+      
+      <div className="done-todos">
+        <Typography.Title level={2} className="section-title">
+          Completed Todos
+        </Typography.Title>
+        
+        {completedTodos.length === 0 ? (
+          <div className="empty-state">
+            <Typography.Text>No completed tasks yet!</Typography.Text>
+          </div>
+        ) : (
+          <List
+            bordered
+            dataSource={completedTodos}
+            renderItem={(item, index) => (
+              <List.Item className="todo-item" key={item.id || index}>
+                <div className="todo-content">
+                  <Typography.Text>{item.text}</Typography.Text>
+                  <div className="shine-effect"></div>
+                </div>
+              </List.Item>
+            )}
+          />
+        )}
+      </div>
     </div>
   );
 };
 
 export default DoneTodos;
+    

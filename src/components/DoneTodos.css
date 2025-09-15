@@ -1,22 +1,197 @@
-/* src/components/DoneTodos.css */
-.done-todos {
-  max-width: 600px; /* 最大宽度 */
-  margin: 20px auto; /* 居中 */
-  padding: 20px; /* 内边距 */
-  background-color: #ffffff; /* 背景颜色 */
-  border-radius: 8px; /* 圆角 */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 阴影 */
+.done-todos-container {
+  position: relative;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f0f2f5;
+  overflow: hidden;
 }
 
-.done-todos h2 {
-  text-align: center; /* 标题居中 */
-  color: #333; /* 标题颜色 */
+/* 背景光效样式 */
+.glow-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
-.done-todo-item {
-  padding: 10px; /* 内边距 */
-  border: 1px solid #e0e0e0; /* 边框 */
-  border-radius: 4px; /* 圆角 */
-  margin: 10px 0; /* 上下外边距 */
-  background-color: #f9f9f9; /* 背景颜色 */
-  transition: background-color 0.3s; /* 背景颜色过渡 */
+
+.background-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  animation: float 20s infinite ease-in-out;
 }
+
+.background-glow:nth-child(1) {
+  background: radial-gradient(circle, rgba(131,56,236,1) 0%, rgba(131,56,236,0) 70%);
+}
+
+.background-glow:nth-child(2) {
+  background: radial-gradient(circle, rgba(56,189,248,1) 0%, rgba(56,189,248,0) 70%);
+}
+
+.background-glow:nth-child(3) {
+  background: radial-gradient(circle, rgba(16,185,129,1) 0%, rgba(16,185,129,0) 70%);
+}
+
+.background-glow:nth-child(4) {
+  background: radial-gradient(circle, rgba(249,115,22,1) 0%, rgba(249,115,22,0) 70%);
+}
+
+/* 主容器样式 */
+.done-todos {
+  position: relative;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  z-index: 1;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* 标题样式与动画 */
+.section-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px !important;
+  position: relative;
+  animation: pulseGlow 3s infinite alternate;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #8b5cf6, #3b82f6, #10b981, #f97316);
+  background-size: 300% 100%;
+  border-radius: 2px;
+  animation: gradientFlow 5s ease infinite;
+}
+
+/* 任务项样式 */
+.todo-item {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-radius: 8px !important;
+  margin-bottom: 12px !important;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.todo-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+  border-color: rgba(139, 92, 246, 0.3) !important;
+}
+
+.todo-content {
+  position: relative;
+  z-index: 1;
+  padding: 12px 0;
+}
+
+/* 流光效果 */
+.shine-effect {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  transition: all 0.8s ease;
+  z-index: 0;
+}
+
+.todo-item:hover .shine-effect {
+  left: 150%;
+}
+
+/* 空状态样式 */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  background-color: rgba(249, 250, 251, 0.8);
+  border-radius: 8px;
+  border: 1px dashed #e5e7eb;
+  position: relative;
+  overflow: hidden;
+}
+
+.empty-state::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(139, 92, 246, 0.05) 0%,
+    rgba(59, 130, 246, 0.05) 50%,
+    rgba(139, 92, 246, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: shine 6s ease infinite;
+}
+
+/* 动画定义 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-30px) translateX(30px);
+  }
+}
+
+@keyframes pulseGlow {
+  from {
+    text-shadow: 0 0 5px rgba(139, 92, 246, 0.3), 0 0 10px rgba(139, 92, 246, 0.1);
+  }
+  to {
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5), 0 0 20px rgba(139, 92, 246, 0.3), 0 0 30px rgba(139, 92, 246, 0.1);
+  }
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+    
