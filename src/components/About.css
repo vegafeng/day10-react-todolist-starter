@@ -1,4 +1,3 @@
-
 * {
   margin: 0;
   padding: 0;
@@ -10,17 +9,60 @@
 .about-container {
   position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: linear-gradient(135deg, #87e8de 0%, #f7b2f2 50%, #ffd791 100%);
-  color: #333;
+  background: linear-gradient(135deg, #0a192f 0%, #112240 50%, #233554 100%);
+  color: #e6f1ff;
   text-align: center;
   overflow: hidden;
 }
+
+
+
+.meteor-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+.meteor {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+  transform-origin: left top;
+  opacity: 0;
+  animation: meteorShoot linear forwards;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+  z-index: 0;
+}
+
+
+@keyframes meteorShoot {
+  0% {
+    transform: rotate(var(--angle)) translateX(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--angle)) translateX(calc(-100vw - 100px));
+    opacity: 0;
+  }
+}
+
 
 
 .hunter-aura-container {
@@ -30,19 +72,17 @@
   width: 100%;
   height: 100%;
   pointer-events: none; 
-  z-index: 0;
+  z-index: 1;
 }
-
 
 .aura-line {
   position: absolute;
   width: 2px;
   height: 60px;
-  background: linear-gradient(180deg, rgba(255, 215, 145, 0) 0%, #ffd791 50%, rgba(255, 215, 145, 0) 100%);
+  background: linear-gradient(180deg, rgba(135, 232, 222, 0) 0%, #87e8de 50%, rgba(135, 232, 222, 0) 100%);
   opacity: 0.7;
   animation: auraFlow linear infinite;
 }
-
 
 @keyframes auraFlow {
   0% {
@@ -64,16 +104,15 @@
 }
 
 
+
 .about-title {
   position: relative;
   font-size: 3.5rem;
   font-weight: 800;
   margin-bottom: 2.5rem;
-  z-index: 1;
-  
-  text-shadow: 0 0 10px rgba(255, 215, 145, 0.8), 0 0 20px rgba(255, 165, 0, 0.5);
+  z-index: 2;
+  text-shadow: 0 0 10px rgba(135, 232, 222, 0.8), 0 0 20px rgba(135, 232, 222, 0.5);
 }
-
 
 .title-char {
   display: inline-block;
@@ -81,7 +120,6 @@
   transform: translateY(30px);
   animation: titleBounce 0.8s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-
 
 @keyframes titleBounce {
   0% {
@@ -99,12 +137,12 @@
 }
 
 
+
 .about-desc-wrapper {
   position: relative;
   max-width: 700px;
-  z-index: 1;
+  z-index: 2;
 }
-
 
 .about-description {
   font-size: 1.5rem;
@@ -113,13 +151,12 @@
   opacity: 0;
   transform: translateY(20px);
   animation: descSlideIn 1s forwards ease-out;
-  
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(35, 53, 84, 0.6);
   padding: 1rem 1.5rem;
   border-radius: 12px;
   backdrop-filter: blur(5px);
+  border: 1px solid rgba(135, 232, 222, 0.3);
 }
-
 
 .about-description.section-1 {
   animation-delay: 0.3s;
@@ -127,7 +164,6 @@
 .about-description.section-2 {
   animation-delay: 0.8s;
 }
-
 
 @keyframes descSlideIn {
   to {
@@ -137,21 +173,21 @@
 }
 
 
+
 .about-hunter-slogan {
   margin-top: 2rem;
   font-size: 1.2rem;
   font-family: 'Noto Sans SC', sans-serif; 
-  color: #7a2e00; 
+  color: #87e8de; 
   opacity: 0;
   transform: scale(0.9);
   animation: sloganPop 1s forwards ease-out;
   animation-delay: 1.2s;
-  
-  border: 2px dashed #ffd791;
+  border: 2px dashed rgba(135, 232, 222, 0.6);
   padding: 0.8rem 1.2rem;
   border-radius: 8px;
+  background: rgba(17, 34, 64, 0.5);
 }
-
 
 @keyframes sloganPop {
   to {
@@ -159,6 +195,7 @@
     transform: scale(1);
   }
 }
+
 
 
 @media (max-width: 768px) {
@@ -175,6 +212,9 @@
   }
   .hunter-aura-container .aura-line {
     height: 40px;
+  }
+  .meteor {
+    max-width: 150px;
   }
 }
 
