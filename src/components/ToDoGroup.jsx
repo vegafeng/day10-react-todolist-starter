@@ -1,41 +1,78 @@
-import React, { useContext, useEffect } from "react";
-import { getToDos } from "../apis/api";
+import React, { useContext, useEffect, useState } from "react";
+import { getToDos, deleteToDo, updateToDo, updateToDoText } from "../apis/api";
 import { TodoContext } from "../contexts/TodoContext"; 
-import { deleteToDo } from "../apis/api";
-import {updateToDo} from "../apis/api";
+import { Button, Modal } from 'antd';
 import './TodoList.css';
+
 const ToDoGroup = () => {
   const { state, dispatch } = useContext(TodoContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentId, setCurrentId] = useState(null); 
+  const [currentText, setCurrentText] = useState(""); 
+
   useEffect(() => {
     getToDos().then((response) => {
       dispatch({ type: 'LOAD_TODOS', todos: response.data });
       console.log(response.data);
     });
+  }, [dispatch]);
 
-
-  }, []);
-
-    const handleClick = async (id) => {
+  const handleClick = async (id) => {
     await updateToDo(id);
     dispatch({ type: 'Done', id });
   };
   
   const handleClickDelete = async (id) => {
-    await deleteToDo(id); // 调用删除的 API
-    dispatch({ type: 'Delete', id }); // 更新状态
+    await deleteToDo(id);
+    dispatch({ type: 'Delete', id });
   };
 
-  return <>
-<div className="todo-items-container">
-  {state.map(({ text, done, id }) => (
-              <div key={id} className="todo-item">
-                <span className={`todo-text ${done ? 'done' : ''}`} onClick={() => handleClick(id)}>
-                  {text}
-                </span>
-                <button className="delete-button" onClick={() => handleClickDelete(id)}>X</button>
-              </div>
-            ))}</div>
-</>
+  const handleClickUpdate = async (id, text) => {
+    setCurrentId(id);
+    setCurrentText(text); // 设置当前文本
+    setIsModalOpen(true); // 打开模态框
+  };
+
+  const handleOk = async () => {
+    if (currentId) {
+      await updateToDoText(currentId, { text: currentText }); 
+      dispatch({ type: 'Update', id: currentId, text: currentText });
+    }
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  return (
+    <>
+      <div className="todo-items-container">
+        {state.map(({ text, done, id }) => (
+          <div key={id} className="todo-item">
+            <span className={`todo-text ${done ? 'done' : ''}`} onClick={() => handleClick(id)}>
+              {text}
+            </span>
+            <Button type="primary" className="update-button" onClick={() => handleClickUpdate(id, text)}>Update</Button>
+            <button className="delete-button" onClick={() => handleClickDelete(id)}>X</button>
+          </div>
+        ))}
+      </div>
+
+      <Modal
+        title="Update ToDo"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <input 
+          type="text" 
+          value={currentText} 
+          onChange={(e) => setCurrentText(e.target.value)} 
+        />
+      </Modal>
+    </>
+  );
 };
 
 export default ToDoGroup;

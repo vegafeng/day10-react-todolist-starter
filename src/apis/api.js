@@ -19,3 +19,7 @@ export const updateToDo = async (id, todo) => {
     todo = { done: true };
     return await instance.put(`/todos/${id}`, todo);
 }
+
+export const updateToDoText = async (id, todo) => {
+    return await instance.put(`/todos/${id}`, todo);
+}
