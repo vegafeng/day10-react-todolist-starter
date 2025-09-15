@@ -34,7 +34,11 @@ function DefaultLayOut() {
   );
 }
 
-
+function ToDoDetail(){
+  const {key}=useParams();
+  console.log(key);
+  return <div>This is:  {key} Detail</div>
+}
 
 const routes = [
   {
@@ -48,6 +52,10 @@ const routes = [
       {
         path: 'about',
         element: <h2>About Page</h2>
+      },
+      {
+        path: 'todos',
+        element: <TodoList />
       }
     ]
   }

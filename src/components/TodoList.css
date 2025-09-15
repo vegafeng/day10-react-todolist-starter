@@ -30,7 +30,7 @@ h2 {
 
 .todo-items-container {
     max-height: 300px; 
-    overflow-y: auto; 
+    overflow-y: auto;    /* Add scroll for long lists */
     margin-bottom: 30px; 
 }
 
