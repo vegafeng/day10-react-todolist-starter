@@ -9,6 +9,7 @@ import {
   useParams
 } from "react-router";
 import  DefaultLayOut  from "./layout/DefaultLayOut";
+import HomePage from "./components/HomePage";
 
 function ToDoDetail(){
   const {key}=useParams();
@@ -34,7 +35,7 @@ const routes = [
     children: [
       {
         path: '',
-        element: <h2>Home Page</h2>
+        element: <HomePage />
       },
       {
         path: 'about',
