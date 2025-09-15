@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router";
 import { Layout, Menu } from 'antd';
-import { HomeOutlined, LoadingOutlined, SettingFilled } from '@ant-design/icons';
+import { HomeOutlined, ExclamationOutlined, SettingFilled, CheckOutlined } from '@ant-design/icons';
 // import './DefaultLayOut.css';
 
 const { Header, Footer, Content } = Layout;
@@ -8,8 +8,9 @@ const { Header, Footer, Content } = Layout;
 const DefaultLayOut = () => {
     const items = [
         { label: <NavLink to="/">Home</NavLink>, key: 'home', icon: <HomeOutlined /> },
-        { label: <NavLink to="/todos">To Do List</NavLink>, key: 'todos', icon: <LoadingOutlined /> },
+        { label: <NavLink to="/todos">To Do List</NavLink>, key: 'todos', icon: <ExclamationOutlined />},
         { label: <NavLink to="/about">About</NavLink>, key: 'about', icon: <SettingFilled /> },
+        { label: <NavLink to="/done">Done Todos</NavLink>, key: 'done', icon: <CheckOutlined /> },
     ];
 
     return (

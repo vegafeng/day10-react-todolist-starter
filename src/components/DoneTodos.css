@@ -1,0 +1,22 @@
+/* src/components/DoneTodos.css */
+.done-todos {
+  max-width: 600px; /* 最大宽度 */
+  margin: 20px auto; /* 居中 */
+  padding: 20px; /* 内边距 */
+  background-color: #ffffff; /* 背景颜色 */
+  border-radius: 8px; /* 圆角 */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 阴影 */
+}
+
+.done-todos h2 {
+  text-align: center; /* 标题居中 */
+  color: #333; /* 标题颜色 */
+}
+.done-todo-item {
+  padding: 10px; /* 内边距 */
+  border: 1px solid #e0e0e0; /* 边框 */
+  border-radius: 4px; /* 圆角 */
+  margin: 10px 0; /* 上下外边距 */
+  background-color: #f9f9f9; /* 背景颜色 */
+  transition: background-color 0.3s; /* 背景颜色过渡 */
+}
