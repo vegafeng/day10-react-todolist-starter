@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { TodoContext } from '../contexts/TodoContext';
 import './TodoList.css';
-import { createToDo } from '../apis/api';
+import { createToDo, fetchTodos } from '../apis/api'; // 假设 fetchTodos 是获取待办事项的函数
+
 const AddToDoList = () => {
   const { dispatch } = useContext(TodoContext);
   const [inputValue, setInputValue] = useState('');
@@ -10,25 +11,34 @@ const AddToDoList = () => {
     setInputValue(e.target.value);
   };
 
-  const handleAdd = async() => {
+  const handleAdd = async () => {
     if (inputValue.trim().length === 0) return alert('Input is empty');
+
     const newToDo = {
       done: false,
       text: inputValue.trim()
-    }
-    const response = await createToDo(newToDo);
-    dispatch({ type: 'Add', todos: response.data });
-    setInputValue('');
+    };
 
+    try {
+      const response = await createToDo(newToDo);
+      dispatch({ type: 'Add', todos: response }); // 添加新待办事项
+      setInputValue('');
+    } catch (error) {
+      console.error('Error adding todo:', error);
+      alert('Failed to add todo. Please try again.');
+    }
   };
 
   return (
-    // <div className="todo-items-container">
     <div className="input-container">
-      <input type="text" value={inputValue} onChange={handleChangeInput} placeholder="Add a new todo..." />
+      <input 
+        type="text" 
+        value={inputValue} 
+        onChange={handleChangeInput} 
+        placeholder="Add a new todo..." 
+      />
       <button onClick={handleAdd}>Add</button>
     </div>
-    // </div>
   );
 };
 

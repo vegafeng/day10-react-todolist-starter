@@ -11,6 +11,7 @@ import {
 import  DefaultLayOut  from "./layout/DefaultLayOut";
 import HomePage from "./components/HomePage";
 import CompletedTodos from "./components/CompletedTodos ";
+import DoneTodos from "./components/DoneTodos";
 
 function ToDoDetail(){
   const {key}=useParams();
@@ -53,6 +54,10 @@ const routes = [
       {
         path: 'completed',
         element: <CompletedTodos /> // 新增的路由
+      },
+      {
+        path: 'done', // 新增的路由
+        element: <DoneTodos /> // 已完成的待办事项组件
       }
 
     ]
