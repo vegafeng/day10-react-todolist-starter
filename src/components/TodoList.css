@@ -1,16 +1,14 @@
 
-
-body {
+/* body {
     font-family: 'Arial', sans-serif; 
     background-color: #f0f0f5; 
-    margin: 0;
-    padding: 20px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh; 
-}
-
+    /* margin: 0; 
+    padding: 0;  */
+    /* display: flex;  */
+    /* justify-content: center;  */
+    /* align-items: center;  */
+    /* height: 100vh;  */
+/* } */ */
 .todo-list {
     max-width: 600px; 
     width: 100%; 
@@ -19,6 +17,7 @@ body {
     border-radius: 8px; 
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
     overflow: hidden; 
+    align-items: center;
 }
 
 h2 {
@@ -32,6 +31,7 @@ h2 {
     max-height: 300px; 
     overflow-y: auto;    /* Add scroll for long lists */
     margin-bottom: 30px; 
+    align-items: center;
 }
 
 .todo-item {

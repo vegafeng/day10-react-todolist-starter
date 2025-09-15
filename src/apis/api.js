@@ -10,10 +10,9 @@ export const getToDos = async () => {
 export const createToDo = async (todo) => {
     return await instance.post('/todos', todo);
 }
-export const deleteToDo = async (id, todo) => {
-    console.log(todo);
+export const deleteToDo = async (id) => {
     console.log(id);
-    return await instance.delete(`/todos/${id}`, { data: todo });
+    return await instance.delete(`/todos/${id}`);
 };
 
 export const updateToDo = async (id, todo) => {

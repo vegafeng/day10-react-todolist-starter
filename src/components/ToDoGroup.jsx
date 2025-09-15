@@ -26,7 +26,7 @@ const ToDoGroup = () => {
   };
 
   return <>
-
+<div className="todo-items-container">
   {state.map(({ text, done, id }) => (
               <div key={id} className="todo-item">
                 <span className={`todo-text ${done ? 'done' : ''}`} onClick={() => handleClick(id)}>
@@ -34,7 +34,7 @@ const ToDoGroup = () => {
                 </span>
                 <button className="delete-button" onClick={() => handleClickDelete(id)}>X</button>
               </div>
-            ))}
+            ))}</div>
 </>
 };
 

@@ -6,33 +6,9 @@ import { TodoContext } from "./contexts/TodoContext";
 import {
   createBrowserRouter,
   RouterProvider,
-  NavLink,
-  Outlet,
   useParams
 } from "react-router";
-
-function DefaultLayOut() {
-  return (
-    <>
-      <header>
-        <h1>My Todo List</h1>
-        <nav>
-          <ul>
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/todos">To Do List</NavLink></li>
-            <li><NavLink to="/about">About</NavLink></li>.
-          </ul>
-        </nav>
-      </header>
-      <main>
-        <Outlet></Outlet>
-      </main>
-      <footer>
-        <p>&copy; 2024 My Todo App</p>
-      </footer>
-    </>
-  );
-}
+import  DefaultLayOut  from "./layout/DefaultLayOut";
 
 function ToDoDetail(){
   const {key}=useParams();
@@ -87,7 +63,6 @@ function App() {
   return (
     <div className="App">
       <TodoContext.Provider value={value}>
-        {/* <TodoList/> */}
          <RouterProvider router={router} />
 
       </TodoContext.Provider>

@@ -40,9 +40,9 @@ const handleChangeInput = (e) => {
         </div>
       ) : (
         <>
-          <div className="todo-items-container">
-            <ToDoGroup />
-          </div>
+          
+          <ToDoGroup />
+      
           <AddToDoList />
         </>
       )}

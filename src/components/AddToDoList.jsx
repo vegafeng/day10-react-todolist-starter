@@ -23,10 +23,12 @@ const AddToDoList = () => {
   };
 
   return (
+    // <div className="todo-items-container">
     <div className="input-container">
       <input type="text" value={inputValue} onChange={handleChangeInput} placeholder="Add a new todo..." />
       <button onClick={handleAdd}>Add</button>
     </div>
+    // </div>
   );
 };
 
