@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getToDos, deleteToDo, updateToDo, updateToDoText } from "../apis/api";
 import { TodoContext } from "../contexts/TodoContext"; 
 import { Button, Modal } from 'antd';
@@ -29,8 +29,8 @@ const ToDoGroup = () => {
 
   const handleClickUpdate = async (id, text) => {
     setCurrentId(id);
-    setCurrentText(text); // 设置当前文本
-    setIsModalOpen(true); // 打开模态框
+    setCurrentText(text); 
+    setIsModalOpen(true); 
   };
 
   const handleOk = async () => {

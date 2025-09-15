@@ -1,7 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { TodoContext } from '../contexts/TodoContext';
 import './TodoList.css';
-import { createToDo, fetchTodos } from '../apis/api'; // 假设 fetchTodos 是获取待办事项的函数
+import { createToDo, fetchTodos } from '../apis/api'; 
 
 const AddToDoList = () => {
   const { dispatch } = useContext(TodoContext);
@@ -10,7 +10,7 @@ const AddToDoList = () => {
   const handleChangeInput = (e) => {
     setInputValue(e.target.value);
   };
-    // 处理回车键添加
+    
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleAdd();
@@ -27,7 +27,7 @@ const AddToDoList = () => {
 
     try {
       const response = await createToDo(newToDo);
-      dispatch({ type: 'Add',  text: inputValue.trim() }); // 添加新待办事项
+      dispatch({ type: 'Add',  text: inputValue.trim() }); 
       setInputValue('');
     } catch (error) {
       console.error('Error adding todo:', error);
