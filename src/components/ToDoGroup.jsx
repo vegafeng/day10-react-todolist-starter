@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { getToDos, deleteToDo, updateToDo, updateToDoText } from "../apis/api";
 import { TodoContext } from "../contexts/TodoContext"; 
-import { Button, Modal } from 'antd';
+import { Button, message, Modal } from 'antd';
 import './TodoList.css';
-import { todoReducer } from "../reducers/todoReducer";
 
 const ToDoGroup = () => {
   const { state, dispatch } = useContext(TodoContext);
@@ -22,7 +21,7 @@ const ToDoGroup = () => {
     const todo = state.find(todo => todo.id === id);
     const { id: _, ...todoUpdate } = todo; // 去掉 id 属性
     todoUpdate.done = true;
-    await updateToDo(id, todoUpdate); 
+    await updateToDo(id, todoUpdate);
     dispatch({ type: 'Done', id });
   };
   
@@ -40,11 +39,13 @@ const ToDoGroup = () => {
   const handleOk = async () => {
     console.log(currentId, currentText);
     if (currentId) {
-      await updateToDoText(currentId, { text: currentText }).catch((error) => {
+      await updateToDoText(currentId, { text: currentText }).then(() => {
+        message.success('Todo updated successfully');
+        dispatch({ type: 'Update', id: currentId, text: currentText });
+      }).catch((error) => {
         console.error('Error updating todo text:', error);
-        alert('Failed to update todo. Please try again.');
+        message.error('Failed to update todo. Please make text not null.');
       });
-      dispatch({ type: 'Update', id: currentId, text: currentText });
     }
     setIsModalOpen(false);
   };
