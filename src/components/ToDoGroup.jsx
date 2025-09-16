@@ -3,6 +3,7 @@ import { getToDos, deleteToDo, updateToDo, updateToDoText } from "../apis/api";
 import { TodoContext } from "../contexts/TodoContext"; 
 import { Button, Modal } from 'antd';
 import './TodoList.css';
+import { todoReducer } from "../reducers/todoReducer";
 
 const ToDoGroup = () => {
   const { state, dispatch } = useContext(TodoContext);
@@ -18,7 +19,10 @@ const ToDoGroup = () => {
   }, [dispatch]);
 
   const handleClick = async (id) => {
-    await updateToDo(id);
+    const todo = state.find(todo => todo.id === id);
+    const { id: _, ...todoUpdate } = todo; // 去掉 id 属性
+    todoUpdate.done = true;
+    await updateToDo(id, todoUpdate); 
     dispatch({ type: 'Done', id });
   };
   
@@ -27,15 +31,19 @@ const ToDoGroup = () => {
     dispatch({ type: 'Delete', id });
   };
 
-  const handleClickUpdate = async (id, text) => {
+  const handleClickUpdate = (id, text) => {
     setCurrentId(id);
     setCurrentText(text); 
     setIsModalOpen(true); 
   };
 
   const handleOk = async () => {
+    console.log(currentId, currentText);
     if (currentId) {
-      await updateToDoText(currentId, { text: currentText }); 
+      await updateToDoText(currentId, { text: currentText }).catch((error) => {
+        console.error('Error updating todo text:', error);
+        alert('Failed to update todo. Please try again.');
+      });
       dispatch({ type: 'Update', id: currentId, text: currentText });
     }
     setIsModalOpen(false);

@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { TodoContext } from '../contexts/TodoContext';
 import './TodoList.css';
-import { createToDo, fetchTodos } from '../apis/api'; 
+import { createToDo } from '../apis/api'; 
 
 const AddToDoList = () => {
   const { dispatch } = useContext(TodoContext);
@@ -27,7 +27,8 @@ const AddToDoList = () => {
 
     try {
       const response = await createToDo(newToDo);
-      dispatch({ type: 'Add',  text: inputValue.trim() }); 
+
+      dispatch({ type: 'Add',  text: inputValue.trim(), id: response.data.id, done: false }); 
       setInputValue('');
     } catch (error) {
       console.error('Error adding todo:', error);
